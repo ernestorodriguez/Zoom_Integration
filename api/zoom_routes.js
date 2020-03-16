@@ -5,13 +5,13 @@ const general = require('../general/zoom_variables_generales');
 var In_meeting = false;
 
 
-router.get('/',async (req, res)  =>  {
+router.get('/',async (req, res, next)  =>  {
     // CONSULTA SI YA EXISTE UNA REUNION CREADA
   if(!In_meeting){
       general.meetingLink =  'no link';
       // SI NO ESTA CREADA, CREA UNA Y ASIGNA EL LINK Y REDIRECCIONA
       general.meetingLink = await service.createMeeting().catch((error) => {
-          console.log("Promise Rejected" + error);
+          next(new Error("Promise Rejected" + JSON.stringify(error)));
       });
       
       general.meetingLink == 429 ? res.redirect(general.error()): '';
@@ -64,6 +64,15 @@ router.get('/error', async (req, res) => {
       })
 });
 
+router.use((error, req, res, next) => {
+    if(error) {
+        res.status(500).json(error)
+    }
+})
+
+router.use(() => {
+        res.status(404).json("no encontrado")
+})
 
 module.exports=router;
 
