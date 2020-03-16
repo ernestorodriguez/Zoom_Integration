@@ -1,0 +1,21 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "zoomtest.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "https": "^1.0.0",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^2.0.2",
+    "request": "^2.88.2",
+    "zoomus": "^0.1.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
